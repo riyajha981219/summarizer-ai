@@ -1,0 +1,16 @@
+# Python bytecode and cache
+__pycache__/
+*.pyc
+
+# OS-generated files
+.DS_Store
+
+# Optional: Ignore future virtual environments
+venv/
+
+# Optional: Ignore large sample media files
+samples/*.mp4
+samples/*.wav
+
+# Optional: ignore secrets if you ever use them
+.env
