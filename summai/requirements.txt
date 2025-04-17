@@ -1,0 +1,10 @@
+openai
+whisper
+pytube
+pdfminer.six
+python-docx
+validators
+beautifulsoup4
+requests
+newspaper3k
+pydub
