@@ -21,7 +21,7 @@ jobs:
 
           BRANCH_NAME="${GITHUB_REF##*/}"
 
-          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@13.232.215.196 << EOF
+          ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_HOST }}@${{ secrets.EC2_USER }} << EOF
             echo "[INFO] Deploying branch: $BRANCH_NAME"
 
             if [ "$BRANCH_NAME" = "master" ]; then
