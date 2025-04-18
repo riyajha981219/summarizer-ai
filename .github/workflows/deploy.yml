@@ -3,7 +3,7 @@ name: Deploy Summarizer AI
 on:
   push:
     branches:
-      - master
+      - prod
       - staging
 
 jobs:
@@ -24,9 +24,9 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << EOF
             echo "[INFO] Deploying branch: $BRANCH_NAME"
 
-            if [ "$BRANCH_NAME" = "master" ]; then
+            if [ "$BRANCH_NAME" = "prod" ]; then
               cd /home/ubuntu/apps/summarizer-ai/production
-              git pull origin master
+              git pull origin prod
               sudo systemctl restart summarizer-ai-production
             elif [ "$BRANCH_NAME" = "staging" ]; then
               cd /home/ubuntu/apps/summarizer-ai/staging
