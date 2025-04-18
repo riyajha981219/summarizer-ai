@@ -1,1 +1,2 @@
-Sample coding update for checking deployment on AWS
+Sample coding update for checking deployment on AWS.
+Generalized check
