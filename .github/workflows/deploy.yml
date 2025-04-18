@@ -1,0 +1,32 @@
+name: Deploy Summarizer AI
+
+on:
+  push:
+    branches:
+      - test-deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy to EC2
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
+          chmod 600 key.pem
+
+          ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            BRANCH="${GITHUB_REF##*/}"
+            if [ "$BRANCH" = "master" ]; then
+              cd /home/ubuntu/apps/summarizer-ai/staging
+              git pull origin master
+              sudo systemctl restart summarizer-ai-production
+            elif [ "$BRANCH" = "staging" ]; then
+              cd /home/ubuntu/apps/summarizer-ai/staging
+              git pull origin staging
+              sudo systemctl restart summarizer-ai-staging
+            fi
+            exit 0
+          EOF
