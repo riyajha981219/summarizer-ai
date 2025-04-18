@@ -9,6 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -24,10 +25,12 @@ jobs:
               cd /home/ubuntu/apps/summarizer-ai/production
               git pull origin master
               sudo systemctl restart summarizer-ai-production
-            elif [ "$BRANCH" = "staging" ]; then
+            elif [ "$BRANCH_NAME" = "staging" ]; then
               cd /home/ubuntu/apps/summarizer-ai/staging
               git pull origin staging
               sudo systemctl restart summarizer-ai-staging
             fi
+
             exit 0
           EOF
+
