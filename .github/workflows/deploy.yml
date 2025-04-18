@@ -19,9 +19,12 @@ jobs:
           echo "${{ secrets.EC2_SSH_KEY }}" > key.pem
           chmod 600 key.pem
 
-          ssh -o StrictHostKeyChecking=no -i key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-            BRANCH="${GITHUB_REF##*/}"
-            if [ "$BRANCH" = "master" ]; then
+          BRANCH_NAME="${GITHUB_REF##*/}"
+
+          ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@$13.232.215.196 << EOF
+            echo "[INFO] Deploying branch: $BRANCH_NAME"
+
+            if [ "$BRANCH_NAME" = "master" ]; then
               cd /home/ubuntu/apps/summarizer-ai/production
               git pull origin master
               sudo systemctl restart summarizer-ai-production
