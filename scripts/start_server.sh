@@ -2,8 +2,8 @@
 echo "ApplicationStart: Restarting the server..."
 BRANCH="$AWS_DEPLOYMENT_GROUP_NAME"
 
-if [[ "$BRANCH" == "StagingDeployment" ]]; then
+if [[ "$BRANCH" == "StagingDeploymentGroup" ]]; then
   sudo systemctl restart summarizer-ai-staging
-elif [[ "$BRANCH" == "ProdDeployment" ]]; then
+elif [[ "$BRANCH" == "ProdDeploymentGroup" ]]; then
   sudo systemctl restart summarizer-ai-production
 fi

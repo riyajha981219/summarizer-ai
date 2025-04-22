@@ -25,9 +25,9 @@ jobs:
           APPLICATION_NAME="SummarizerAIApplication"
           DEPLOYMENT_GROUP_NAME="${GITHUB_REF##*/}" # Extracts 'prod' or 'staging'
           if [ "$DEPLOYMENT_GROUP_NAME" == "prod" ]; then
-            DEPLOYMENT_GROUP_NAME="ProdDeployment" # Map 'prod' branch to Prod DG
+            DEPLOYMENT_GROUP_NAME="ProdDeploymentGroup" # Map 'prod' branch to Prod DG
           elif [ "$DEPLOYMENT_GROUP_NAME" == "staging" ]; then
-            DEPLOYMENT_GROUP_NAME="StagingDeployment" # Map 'staging' branch to Staging DG
+            DEPLOYMENT_GROUP_NAME="StagingDeploymentGroup" # Map 'staging' branch to Staging DG
           fi
 
           aws deploy create-deployment \
