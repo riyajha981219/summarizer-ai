@@ -34,5 +34,5 @@ jobs:
             --application-name "$APPLICATION_NAME" \
             --deployment-group-name "$DEPLOYMENT_GROUP_NAME" \
             --deployment-config-name CodeDeployDefault.AllAtOnce \
-            --revision "repository=$(echo $GITHUB_REPOSITORY),commit=$(echo $GITHUB_SHA)" \
+            --revision '{"revisionType": "GitHub", "gitHubLocation": {"repository": "${{ github.repository }}", "commitId": "${{ github.sha }}"}}' \
             --region "${{ secrets.AWS_REGION }}"
